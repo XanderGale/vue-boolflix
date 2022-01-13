@@ -1,28 +1,54 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <Header @searchInput="search" />
+    <Main :moviesList="moviesArray"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import axios from 'axios';
+import Header from "./components/Header.vue";
+import Main from "./components/Main.vue";
 
 export default {
   name: "App",
   components: {
-    HelloWorld,
+    Header,
+    Main,
   },
+  data: function() {
+    return {
+      // API necessary
+      searchMoviesString: '',
+      apiKey: '1584bfdd76106d8fa0cd13aed08a65ef',
+      // API Returns
+      moviesArray: [],
+    };
+  },
+  methods: {
+    // Chiamata Movies
+    searchMovies: function(){
+      axios.get(
+        'https://api.themoviedb.org/3/search/movie',
+        {
+          params: {
+            api_key: this.apiKey,
+            query: this.searchMoviesString,
+          }
+        }
+      ).then((response) => {
+        this.moviesArray = response.data.results;
+      });
+    },
+    // Chiamata generale
+    search: function(inputString){
+      this.searchMoviesString = inputString;
+      this.searchMovies();
+    },
+  }
 };
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
