@@ -7,21 +7,36 @@
         </div>
 
         <div class="item-details">
-            <h2>Titolo: {{ serieInfos.name }}</h2>
-            <h3>Titolo Originale: {{ serieInfos.original_name }}</h3>
-            <h5>Lingua:</h5>
-            <!-- Img Lingua se disponibile -->
-            <span v-if="flags.includes(serieInfos.original_language)">
-                <img :src="require('../assets/img/flags/' + serieInfos.original_language + '.png')" :alt="serieInfos.original_language + ' flag'">
-            </span>
-            <!-- Testo -->
-            <span v-else>
-                <h5>{{ serieInfos.original_language }}</h5>
-            </span>
-            
-            <h4>Voto:</h4>
+        
+            <ul>
+                <!-- Titolo -->
+                <li>
+                    <h2>Titolo: {{ serieInfos.name }}</h2>
+                </li>
+                <!-- Titolo Originale -->
+                <li>
+                    <h3>Titolo Originale: {{ serieInfos.original_name }}</h3>
+                </li>
+                <!-- Lingua -->
+                <li>
+                    <h5>Lingua:</h5>
+                    <!-- Img Lingua se disponibile -->
+                    <span v-if="flags.includes(serieInfos.original_language)">
+                        <img :src="require('../assets/img/flags/' + serieInfos.original_language + '.png')" :alt="serieInfos.original_language + ' flag'">
+                    </span>
+                    <!-- Testo se immagine lingua non disponibile -->
+                    <span v-else>
+                        <h5>{{ serieInfos.original_language }}</h5>
+                    </span>
+                </li>
+                <!-- Rating -->
+                <li>
+                    <h4>Voto:</h4>
 
-            <star-rating :rating="Math.round((serieInfos.vote_average / 2))" :read-only="true" :show-rating="false" :star-size="20" :inline="true"></star-rating>
+                    <star-rating :rating="Math.round((serieInfos.vote_average / 2))" :read-only="true" :show-rating="false" :star-size="20" :inline="true"></star-rating>
+
+                </li>
+            </ul>
         </div>
     </div>
 </template>
@@ -69,9 +84,19 @@ export default {
 
         overflow: hidden;
 
-        background-color: green;
+        background: rgb(0,0,0);
+        background: linear-gradient(180deg, rgba(61,61,61,1) 0%, rgba(0,0,0,1) 84%);
+
+        -webkit-box-shadow: 5px 5px 15px 5px rgba(61,61,61,1); 
+        box-shadow: 5px 5px 15px 5px rgba(61,61,61,1);
         .item-details{
             display: none;
+            padding: 10px;
+        }
+        ul{
+            list-style-type: none;
+            height: 100%;
+            width: 100%;
         }
         .item-image{
             width: 100%;
@@ -80,7 +105,7 @@ export default {
                 height: 100%;
                 width: 100%;
             }
-        } 
+        }
     }
     .main-item:hover .item-details{
         display: block;
