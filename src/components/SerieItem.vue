@@ -3,7 +3,7 @@
         <!-- Poster Image -->
         <div class="item-image">
             <img v-if="serieInfos.backdrop_path==null" src="../assets/img/404-img.png" alt="Image not available">
-            <img v-else :src="'https://image.tmdb.org/t/p/w500' + serieInfos.backdrop_path" :alt="serieInfos.name + ' image'">
+            <img v-else :src="'https://image.tmdb.org/t/p/w342' + serieInfos.backdrop_path" :alt="serieInfos.name + ' image'">
         </div>
 
         <div class="item-details">
@@ -59,10 +59,15 @@ export default {
         min-width: 300px;
         max-width: 300px;
 
+        width: 300px;
+        height: 500px;
+
         min-height: 500px;
         max-height: 500px;
 
         margin: 0px 30px;
+
+        overflow: hidden;
 
         background-color: green;
         .item-details{
@@ -73,10 +78,14 @@ export default {
             height: 100%;
             img{
                 height: 100%;
-                overflow: hidden;
-                object-fit: cover;
-                object-position: center;
+                width: 100%;
             }
         } 
+    }
+    .main-item:hover .item-details{
+        display: block;
+    }
+    .main-item:hover .item-image{
+        display: none;
     }
 </style>
