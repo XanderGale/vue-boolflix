@@ -14,7 +14,7 @@
         
         <h4>Voto:</h4>
 
-        <star-rating :rating="Math.round((serieInfos.vote_average / 2))" :read-only="true" :increment="1" :show-rating="true" :star-size="20" :inline="true"></star-rating>
+        <star-rating :rating="Math.round((serieInfos.vote_average / 2))" :read-only="true" :show-rating="false" :star-size="20" :inline="true"></star-rating>
     </div>
 </template>
 

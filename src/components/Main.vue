@@ -1,9 +1,16 @@
 <template>
     <main>
+
         <h2>Movies:</h2>
-        <MovieItem v-for='(movie) in moviesList' :key="movie.id" :movieInfos="movie"/>
+        <div class="movies-list">
+            <MovieItem v-for='(movie) in moviesList' :key="movie.id" :movieInfos="movie"/>
+        </div>
+        
         <h2>Tv Shows:</h2>
-        <SerieItem v-for='(serie) in seriesList' :key="serie.id" :serieInfos="serie"/>
+        <div class="series-list">
+            <SerieItem v-for='(serie) in seriesList' :key="serie.id" :serieInfos="serie"/>
+        </div>
+        
     </main>
 </template>
 
@@ -25,5 +32,16 @@ export default {
 </script>
 
 <style scoped lang="scss">
+    main{
+        height: calc(100vh - 70px);
+        overflow-y: auto;
+        padding: 10px;
+        color: white;
 
+        background: rgb(0,0,0);
+        background: linear-gradient(180deg, rgba(61,61,61,1) 0%, rgba(0,0,0,1) 84%);
+        h2{
+            text-transform: uppercase;
+        }
+    }
 </style>
