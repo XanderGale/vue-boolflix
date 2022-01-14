@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header @searchInput="search" />
-    <Main :moviesList="moviesArray"/>
+    <Main :moviesList="moviesArray" :seriesList="seriesArray"/>
   </div>
 </template>
 
@@ -23,6 +23,7 @@ export default {
       apiKey: '1584bfdd76106d8fa0cd13aed08a65ef',
       // API Returns
       moviesArray: [],
+      seriesArray: [],
     };
   },
   methods: {
@@ -40,10 +41,24 @@ export default {
         this.moviesArray = response.data.results;
       });
     },
+    searchSeries: function(){
+      axios.get(
+        'https://api.themoviedb.org/3/search/tv',
+        {
+          params: {
+            api_key: this.apiKey,
+            query: this.searchMoviesString,
+          }
+        }
+      ).then((response) => {
+        this.seriesArray = response.data.results;
+      });
+    },
     // Chiamata generale
     search: function(inputString){
       this.searchMoviesString = inputString;
       this.searchMovies();
+      this.searchSeries();
     },
   }
 };
